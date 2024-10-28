@@ -4,6 +4,7 @@ import psutil
 import time
 import random
 import json
+import getpass
 
 class MiniOS:
     
@@ -60,7 +61,7 @@ class MiniOS:
             action = input("Would you like to 'login' or 'register'? ").strip().lower()
             if action == "login":
                 username = input("Username: ")
-                password = input("Password: ")
+                password = getpass.getpass("Password: ")
                 if self.authenticate(username, password):
                     self.current_user = username
                     print(f"Welcome, {self.current_user}!")
@@ -69,7 +70,7 @@ class MiniOS:
                     print("Invalid username or password. Please try again.")
             elif action == "register":
                 username = input("Choose a username: ")
-                password = input("Choose a password: ")
+                password =getpass.getpass("Choose a password: ")
                 if self.register(username, password):
                     print("Registration successful! You can now log in.")
                 else:
