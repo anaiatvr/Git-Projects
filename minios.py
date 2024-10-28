@@ -102,7 +102,7 @@ class MiniOS:
         while self.running:
             if not self.current_user:
                 self.login()
-            command = input(f"{self.current_user}> ").strip().split()
+            command = input(f"{self.current_user}> Please enter a command. \nIf lost, type 'help': ").strip().split()
             if command:
                 self.command_history.append(' '.join(command))  #Store command in history
                 self.execute_command(command)
@@ -122,8 +122,37 @@ class MiniOS:
     # Core Commands
     def help(self):
         print("Available commands:")
-        for cmd in self.commands:
-            print(f"  {cmd}")
+        print("\n--- File Management ---")
+        print("  ls                 : List files in the current directory.")
+        print("  touch <filenames>  : Create one or more empty files.")
+        print("  rm <filenames>     : Remove one or more files.")
+        print("  cat <filenames>    : Display the contents of one or more files.")
+        print("  echo <message> > <filename> : Write a message to a file.")
+
+        print("\n--- Process Management ---")
+        print("  ps                 : List currently running processes.")
+        print("  run <script>       : Run a Python script as a new process.")
+        print("  kill <pid>         : Terminate a process by its PID.")
+
+        print("\n--- System Monitoring ---")
+        print("  cpu                : Display current CPU usage.")
+        print("  memory             : Display current memory usage.")
+        print("  uptime             : Show how long the system has been running.")
+
+        print("\n--- Games ---")
+        print("  calc               : Start a simple calculator.")
+        print("  blackjack          : Play a game of Blackjack.")
+
+        print("\n--- User Management ---")
+        print("  login              : Log in to your account.")
+        print("  register           : Create a new user account.")
+        print("  logout             : Log out of the current user account.")
+        print("  delete_users       : Delete all user accounts.")
+
+        print("\n--- Miscellaneous ---")
+        print("  help               : Show this help menu.")
+        print("  history            : Show the command history.")
+        print("  exit               : Exit the MiniOS.")
 
     def ls(self):
         print("Listing files:")
@@ -226,13 +255,19 @@ class MiniOS:
         print(f"System Uptime: {int(hours)} hours, {int(minutes)} minutes, {int(seconds)} seconds")
 
     # Custom Calculator
+  
     def calc(self):
-        try:
-            expr = input("Enter expression (e.g., 5 + 3 * 2): ")
-            result = eval(expr, {"__builtins__": None}, {})
-            print(f"Result: {result}")
-        except Exception as e:
-            print(f"Calculation error: {e}")
+        print("Welcome to the simple calculator! Type 'exit' to quit.")
+        while True:
+            try:
+                expr = input("Enter expression (e.g., 5 + 3 * 2): ")
+                if expr.lower() == "exit":
+                    print("Exiting calculator.")
+                    break  # Exit the loop if the user types 'exit'
+                result = eval(expr, {"__builtins__": None}, {})
+                print(f"Result: {result}")
+            except Exception as e:
+                print(f"Calculation error: {e}")
 
     # Blackjack Game
     def blackjack(self):
